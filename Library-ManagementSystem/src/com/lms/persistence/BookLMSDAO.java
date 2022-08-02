@@ -4,6 +4,8 @@ import com.lms.bean.Book;
 
 public interface BookLMSDAO {
     boolean addBook(Book book);
-    Integer removeBook(int bookID);
-    Book searchBook(int bookID);
+
+    Integer removeBook(String bookName);
+
+    Book searchBook(String bookName);
 }
