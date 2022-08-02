@@ -29,7 +29,7 @@ public class BookLMSImpl implements BookLMSDAO {
     }
 
     @Override
-    public Integer removeBook(String bookName) {
+    public int removeBook(String bookName) {
         int rows = 0;
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/",
                 "", "");
@@ -74,4 +74,35 @@ public class BookLMSImpl implements BookLMSDAO {
         }
         return book;
     }
+
+	@Override
+	public boolean issueBook(int transactionId, int bookId, String issueDate,String ScheduledDate) {
+		 int rows = 0;
+		try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/--",
+                "", "");
+				
+             PreparedStatement preparedStatement = connection
+                     .prepareStatement("INSERT INTO TBR(Transaction_Id,Book_id,issue_Date,Scheduled_Return) values(?, ?, ?, ?)");) {
+
+
+            preparedStatement.setString(3,issueDate);
+            preparedStatement.setInt(1, transactionId);
+            preparedStatement.setString(4, ScheduledDate);
+            preparedStatement.setInt(2,bookId );
+
+            rows = preparedStatement.executeUpdate();
+
+          
+        } catch (SQLException e) {
+            System.out.println(e.getLocalizedMessage());
+        }
+		 return rows > 0;
+	}
+
+	@Override
+	public boolean returnBook(int employeeId, int bookId) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
 }

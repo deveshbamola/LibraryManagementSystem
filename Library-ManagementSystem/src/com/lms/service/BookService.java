@@ -10,6 +10,8 @@ public interface BookService {
     Boolean removeBook(String bookName);
 
     Book searchBook(String bookName);
+    
+    boolean issueBook(int transactionId,int bookId,String ScheduledDate);
 
     List<Book> getAllBooks();
 }

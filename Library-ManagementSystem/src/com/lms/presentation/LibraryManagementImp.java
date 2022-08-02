@@ -57,6 +57,7 @@ public class LibraryManagementImp implements LibraryManagementPresentation {
                 removeBook();
                 break;
             case 9:
+            	issueBook();
                 break;
             case 10:
                 break;
@@ -122,6 +123,15 @@ public class LibraryManagementImp implements LibraryManagementPresentation {
 
     private void addBook() {
 
+    }
+    private void issueBook() {
+    	System.out.print("Enter Employee ID: ");
+        int id = scanner.nextInt();
+        System.out.print("Enter Book ID: ");
+        int bid = scanner.nextInt();
+        System.out.print("Enter Scheduled Return Date");
+        String date = scanner.next();
+         System.out.println( bookService.issueBook(id, bid, date));
     }
 
     private void removeBook() {
