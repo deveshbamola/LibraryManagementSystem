@@ -7,29 +7,30 @@ CREATE TABLE employee (
     desg varchar(20),
     booksIssued int
 );
+alter table tbr modify column TBRID Binary(24);
 
 -- Transation Book Record Table
 create table tbr(
 TBRID int primary key,
  bookId int,
  transationId int,
- issueDate varchar(20),
- scheduledReturn varchar(10),
+ issueDate datetime,
+ scheduledReturn datetime,
  fine double,
- returnDate varchar(10),
+ returnDate datetime,
  FOREIGN KEY (bookId) REFERENCES book(bookId),
   FOREIGN KEY (transationId) REFERENCES transations(transationId)
-);-- Time and date
-
+ 
+);
 -- Transations Table
 create table transations(
 transationId int primary key,
-membershipId int,
-constraint FOREIGN KEY (membershipId) REFERENCES employee(membershipId)
+employeeId int,
+constraint FOREIGN KEY (employeeId) REFERENCES employee(employeeId)
 );
--- employ ID 
+
 -- Book Table
-create table book(
+create   table book(
 bookId int primary key,
 bookName varchar(20),
 ISBNNumber int,
