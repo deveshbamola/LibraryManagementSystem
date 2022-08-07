@@ -4,6 +4,7 @@ import com.lms.bean.Book;
 import com.lms.persistence.BookLMSDAO;
 import com.lms.persistence.BookLMSImpl;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class BookServiceImpl implements BookService {
@@ -28,4 +29,11 @@ public class BookServiceImpl implements BookService {
     public List<Book> getAllBooks() {
         return bookLMSDAO.getAllBooks();
     }
+
+	@Override
+	public boolean issueBook(int transactionId, int bookId, String ScheduledDate) {
+		 LocalDate date = LocalDate.now();
+	     System.out.println("Current date: "+date);
+		return bookLMSDAO.issueBook(transactionId, bookId, date.toString(),ScheduledDate);
+	}
 }

@@ -32,7 +32,7 @@ public class BookLMSImpl implements BookLMSDAO {
     }
 
     @Override
-    public Integer removeBook(String bookName) {
+    public int removeBook(String bookName) {
         int rows = 0;
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/",
                 "", "");
@@ -67,7 +67,7 @@ public class BookLMSImpl implements BookLMSDAO {
                 String authorName = resultSet.getString("authorName");
                 String publisherName = resultSet.getString("publisherName");
                 String bookType = resultSet.getString("bookType");
-                int  bookNumber = resultSet.getInt("bookNumber");
+                int bookNumber = resultSet.getInt("bookNumber");
 
                 book = new Book(bookName, isbnNumber, authorName, publisherName, bookType, bookNumber);
             }
@@ -77,6 +77,7 @@ public class BookLMSImpl implements BookLMSDAO {
         }
         return book;
     }
+
 
     @Override
     public List<Book> getAllBooks() {
@@ -101,5 +102,34 @@ public class BookLMSImpl implements BookLMSDAO {
             e.printStackTrace();
         }
         return bookList;
+    }
+
+    @Override
+    public boolean issueBook(int transactionId, int bookId, String issueDate, String ScheduledDate) {
+        int rows = 0;
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/--",
+                "", "");
+
+             PreparedStatement preparedStatement = connection
+                     .prepareStatement("INSERT INTO TBR(Transaction_Id,Book_id,issue_Date,Scheduled_Return) values(?, ?, ?, ?)");) {
+
+
+            preparedStatement.setString(3, issueDate);
+            preparedStatement.setInt(1, transactionId);
+            preparedStatement.setString(4, ScheduledDate);
+            preparedStatement.setInt(2, bookId);
+
+            rows = preparedStatement.executeUpdate();
+
+
+        } catch (SQLException e) {
+            System.out.println(e.getLocalizedMessage());
+        }
+        return rows > 0;
+    }
+
+    @Override
+    public boolean returnBook(int employeeId, int bookId) {
+        return false;
     }
 }
