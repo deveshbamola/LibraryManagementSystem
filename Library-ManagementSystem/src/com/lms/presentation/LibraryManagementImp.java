@@ -36,6 +36,7 @@ public class LibraryManagementImp implements LibraryManagementPresentation {
         switch (choice) {
             case 1:
                 getAllEmployees();
+                break;
             case 2:
                 searchEmployee();
                 break;
@@ -86,9 +87,8 @@ public class LibraryManagementImp implements LibraryManagementPresentation {
         String empLastName = scanner.next();
         System.out.println("Enter Designation: ");
         String designation = scanner.next();
-        System.out.println("Enter Employee Phone Number: ");
-        long empPhoneNumber = scanner.nextLong();
-        Employee employee = new Employee(empID, empFirstName, empFirstName, designation, 0, empPhoneNumber);
+        
+        Employee employee = new Employee(empID, empFirstName, empFirstName, designation, 0);
         System.out.println(employeeService.addEmployee(employee) ? "Success !!" : "Failure");
     }
 

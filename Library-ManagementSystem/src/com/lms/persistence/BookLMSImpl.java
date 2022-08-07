@@ -8,8 +8,7 @@ public class BookLMSImpl implements BookLMSDAO {
     @Override
     public boolean addBook(Book book) {
         int rows = 0;
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/--", "",
-                "");
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/lms","root","wiley");
              PreparedStatement preparedStatement = connection
                      .prepareStatement("INSERT INTO book values(?, ?, ?, ?, ?, ?, ?)");) {
 
@@ -31,8 +30,7 @@ public class BookLMSImpl implements BookLMSDAO {
     @Override
     public int removeBook(String bookName) {
         int rows = 0;
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/",
-                "", "");
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/lms","root","wiley");
              PreparedStatement preparedStatement = connection
                      .prepareStatement("DELETE FROM book WHERE bookName=?")) {
 
@@ -48,10 +46,9 @@ public class BookLMSImpl implements BookLMSDAO {
     @Override
     public Book searchBook(String name) {
         Book book = null;
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/--",
-                "", "");
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/lms","root","wiley");
              PreparedStatement preparedStatement = connection
-                     .prepareStatement("SELECT * FROM book WHERE bookId=?");) {
+                     .prepareStatement("SELECT * FROM book  WHERE bookName=?");) {
 
             int bookID = 0; // temp --
 
@@ -78,8 +75,7 @@ public class BookLMSImpl implements BookLMSDAO {
 	@Override
 	public boolean issueBook(int transactionId, int bookId, String issueDate,String ScheduledDate) {
 		 int rows = 0;
-		try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/--",
-                "", "");
+		try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/lms","root","wiley");
 				
              PreparedStatement preparedStatement = connection
                      .prepareStatement("INSERT INTO TBR(Transaction_Id,Book_id,issue_Date,Scheduled_Return) values(?, ?, ?, ?)");) {

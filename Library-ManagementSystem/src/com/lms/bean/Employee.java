@@ -8,15 +8,15 @@ public class Employee {
     private String empLastName;
     private String designation;
     private int numberOfBooksIssued;
-    private long phoneNumber;
+   
 
-    public Employee(int employeeId, String empFirstName, String empLastName, String designation, int numberOfBooksIssued, long phoneNumber) {
+    public Employee(int employeeId, String empFirstName, String empLastName, String designation, int numberOfBooksIssued) {
         this.employeeId = employeeId;
         this.empFirstName = empFirstName;
         this.empLastName = empLastName;
         this.designation = designation;
         this.numberOfBooksIssued = numberOfBooksIssued;
-        this.phoneNumber = phoneNumber;
+       
     }
 
     public String getDesignation() {
@@ -43,9 +43,7 @@ public class Employee {
         return numberOfBooksIssued;
     }
 
-    public long getPhoneNumber() {
-        return phoneNumber;
-    }
+  
 
     public void setEmployeeId(int employeeId) {
         this.employeeId = employeeId;
@@ -63,18 +61,12 @@ public class Employee {
         this.numberOfBooksIssued = numberOfBooksIssued;
     }
 
-    public void setPhoneNumber(long phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
+	@Override
+	public String toString() {
+		return "Employee [employeeId=" + employeeId + ", empFirstName=" + empFirstName + ", empLastName=" + empLastName
+				+ ", designation=" + designation + ", numberOfBooksIssued=" + numberOfBooksIssued + "]";
+	}
 
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "employeeId=" + employeeId +
-                ", empFirstName='" + empFirstName + '\'' +
-                ", empLastName='" + empLastName + '\'' +
-                ", numberOfBooksIssued=" + numberOfBooksIssued +
-                ", phoneNumber=" + phoneNumber +
-                '}';
-    }
+
+   
 }

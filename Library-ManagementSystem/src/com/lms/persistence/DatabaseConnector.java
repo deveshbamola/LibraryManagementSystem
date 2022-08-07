@@ -9,6 +9,7 @@ class DatabaseConnector {
 
     Connection connection;
     PreparedStatement preparedStatement;
+    
 
     public DatabaseConnector(String URL, String user, String password) throws SQLException {
 
