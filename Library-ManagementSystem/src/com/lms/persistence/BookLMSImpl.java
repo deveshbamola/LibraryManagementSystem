@@ -1,8 +1,11 @@
 package com.lms.persistence;
 
 import com.lms.bean.Book;
+import com.lms.bean.Employee;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BookLMSImpl implements BookLMSDAO {
     @Override
@@ -18,7 +21,7 @@ public class BookLMSImpl implements BookLMSDAO {
             preparedStatement.setString(4, book.getAuthorName());
             preparedStatement.setString(5, book.getPublisherName());
             preparedStatement.setString(6, book.getBookType());
-            preparedStatement.setInt(7, book.getBookNumber());
+            preparedStatement.setInt(7, book.getNumberofBooks());
 
             rows = preparedStatement.executeUpdate();
 
@@ -73,5 +76,30 @@ public class BookLMSImpl implements BookLMSDAO {
             System.out.println(e.getLocalizedMessage());
         }
         return book;
+    }
+
+    @Override
+    public List<Book> getAllBooks() {
+        List<Book> bookList = new ArrayList<>();
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/--",
+                "", "");
+             PreparedStatement preparedStatement = connection
+                     .prepareStatement("SELECT * FROM book");) {
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("bookId");
+                String name = resultSet.getString("bookName");
+                int isbn = resultSet.getInt("ISBNNumber");
+                String author = resultSet.getString("bookAuthor");
+                String publisher = resultSet.getString("bookPublisher");
+                String bookType = resultSet.getString("bookType");
+                int noOfBooks = resultSet.getInt("noOfBooks");
+                bookList.add(new Book(name, isbn, author, publisher, bookType, noOfBooks));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return bookList;
     }
 }

@@ -1,9 +1,14 @@
 package com.lms.presentation;
 
-import com.lms.bean.*;
-import com.lms.service.*;
+import com.lms.bean.Book;
+import com.lms.bean.Employee;
+import com.lms.service.BookService;
+import com.lms.service.BookServiceImpl;
+import com.lms.service.EmployeeService;
+import com.lms.service.EmployeeServiceImpl;
 
-import java.util.*;
+import java.util.List;
+import java.util.Scanner;
 
 public class LibraryManagementImp implements LibraryManagementPresentation {
     Scanner scanner = new Scanner(System.in);
@@ -121,10 +126,36 @@ public class LibraryManagementImp implements LibraryManagementPresentation {
     }
 
     private void addBook() {
+        System.out.println("Enter Book Name: ");
+        String name = scanner.next();
+        System.out.println("Enter ISBN Number: ");
+        int isbn_number = scanner.nextInt();
+        System.out.println("Enter Author Name: ");
+        String authorName = scanner.next();
+        System.out.println("Enter Publisher Name: ");
+        String publisherName = scanner.next();
+        System.out.println("Enter Book Type: ");
+        String bookType = scanner.next();
+        System.out.println("Enter Number of Books: ");
+        int bookNum = scanner.nextInt();
+        Book book = new Book(name, isbn_number, authorName, publisherName, bookType, bookNum);
+        System.out.println(bookService.addBook(book) ? "Success" : "Failed");
 
     }
 
     private void removeBook() {
+        System.out.println("Enter Book Name");
+        String name = scanner.next();
+        System.out.println(bookService.removeBook(name) ? "Success" : "Failed");
+    }
 
+    private void getAllBooks() {
+        List<Book> bookList = bookService.getAllBooks();
+        if (bookList == null) {
+            System.out.println("No Employee Found");
+            return;
+        }
+        for (Book book : bookList)
+            System.out.println(book);
     }
 }

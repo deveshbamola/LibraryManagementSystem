@@ -7,7 +7,7 @@ public class Book {
     private String authorName;
     private String publisherName;
     private String bookType;
-    private int bookNumber;
+    private int numberofBooks;
 
     public Book(String bookName, int isbnNumber, String authorName, String publisherName, String bookType, int bookNumber) {
         super();
@@ -16,7 +16,7 @@ public class Book {
         this.authorName = authorName;
         this.publisherName = publisherName;
         this.bookType = bookType;
-        this.bookNumber = bookNumber;
+        this.numberofBooks = bookNumber;
     }
 
     public String getBookName() {
@@ -59,12 +59,12 @@ public class Book {
         this.bookType = bookType;
     }
 
-    public int getBookNumber() {
-        return bookNumber;
+    public int getNumberofBooks() {
+        return numberofBooks;
     }
 
-    public void setBookNumber(int bookNumber) {
-        this.bookNumber = bookNumber;
+    public void setNumberofBooks(int numberofBooks) {
+        this.numberofBooks = numberofBooks;
     }
 
     @Override
@@ -75,7 +75,7 @@ public class Book {
                 ", authorName='" + authorName + '\'' +
                 ", publisherName='" + publisherName + '\'' +
                 ", bookType='" + bookType + '\'' +
-                ", bookNumber=" + bookNumber +
+                ", Number of Books=" + numberofBooks +
                 '}';
     }
 }
