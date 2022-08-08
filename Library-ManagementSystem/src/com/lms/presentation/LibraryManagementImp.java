@@ -23,9 +23,9 @@ public class LibraryManagementImp implements LibraryManagementPresentation {
         System.out.println("8. Remove Book");
         System.out.println("------------------");
         System.out.println("9. Issue Book");
-        System.out.println("10. Return Book");
-        System.out.println("11. Check Due Return Date");
-        System.out.println("12. Pay Fine");
+//        System.out.println("10. Return Book");
+//        System.out.println("11. Check Due Return Date");
+//        System.out.println("12. Pay Fine");
         int choice = scanner.nextInt();
         performMenu(choice);
 
@@ -47,6 +47,7 @@ public class LibraryManagementImp implements LibraryManagementPresentation {
                 deleteEmployee();
                 break;
             case 5:
+            	getAllBooks();
                 break;
             case 6:
                 searchBook();
@@ -66,6 +67,15 @@ public class LibraryManagementImp implements LibraryManagementPresentation {
                 System.exit(0);
 
         }
+    }
+    private void getAllBooks() {
+        List<Book> bookList = bookService.getAllBooks();
+        if (bookList == null) {
+            System.out.println("No Employee Found");
+            return;
+        }
+        for (Book book : bookList)
+            System.out.println(book);
     }
 
     private void getAllEmployees() {
@@ -88,7 +98,7 @@ public class LibraryManagementImp implements LibraryManagementPresentation {
         System.out.println("Enter Designation: ");
         String designation = scanner.next();
         
-        Employee employee = new Employee(empID, empFirstName, empFirstName, designation, 0);
+        Employee employee = new Employee(empID, empFirstName, empLastName, designation, 0);
         System.out.println(employeeService.addEmployee(employee) ? "Success !!" : "Failure");
     }
 
@@ -112,8 +122,10 @@ public class LibraryManagementImp implements LibraryManagementPresentation {
     }
 
     private void searchBook() {
-        System.out.println("Enter Book Name: ");
-        String name = scanner.next();
+        System.out.println("Enter Book Name: "+"\n");
+        scanner.nextLine();
+        String name = scanner.nextLine();
+      
         Book book = bookService.searchBook(name);
         if (book != null)
             System.out.println(book);
@@ -122,7 +134,26 @@ public class LibraryManagementImp implements LibraryManagementPresentation {
     }
 
     private void addBook() {
+        System.out.println("Enter Book Name: ");
+        String name = scanner.next();
+        System.out.println("Enter ISBN Number: ");
+        int isbn_number = scanner.nextInt();
+        System.out.println("Enter Author Name: ");
+        String authorName = scanner.next();
+        System.out.println("Enter Publisher Name: ");
+        String publisherName = scanner.next();
+        System.out.println("Enter Book Type: ");
+        String bookType = scanner.next();
+        System.out.println("Enter Number of Books: ");
+        int bookNum = scanner.nextInt();
+        Book book = new Book(name, isbn_number, authorName, publisherName, bookType, bookNum);
+        System.out.println(bookService.addBook(book) ? "Success" : "Failed");
 
+    }
+    private void removeBook() {
+        System.out.println("Enter Book Name");
+        String name = scanner.next();
+        System.out.println(bookService.removeBook(name) ? "Success" : "Failed");
     }
     private void issueBook() {
     	System.out.print("Enter Employee ID: ");
@@ -133,8 +164,4 @@ public class LibraryManagementImp implements LibraryManagementPresentation {
         String date = scanner.next();
          System.out.println( bookService.issueBook(id, bid, date));
     }
-
-    private void removeBook() {
-
     }
-}

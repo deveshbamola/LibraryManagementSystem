@@ -1,5 +1,7 @@
 package com.lms.persistence;
 
+import java.util.List;
+
 import com.lms.bean.Book;
 
 public interface BookLMSDAO {
@@ -8,7 +10,7 @@ public interface BookLMSDAO {
     int removeBook(String bookName);
 
     Book searchBook(String bookName);
-    
+     List<Book> getAllBooks();
     boolean issueBook(int transactionId,int bookId,String issueDate,String ScheduledDate);
     boolean returnBook(int employeeId,int bookId);
 }

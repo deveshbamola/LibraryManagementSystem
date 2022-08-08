@@ -11,7 +11,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     @Override
     public Integer addEmployee(Employee employee) {
         int rows = 0;
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/lms","root","wiley");
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/lms","root","devesh_bamola");
              PreparedStatement preparedStatement = connection
                      .prepareStatement("INSERT INTO employee VALUES(?,?,?,?,?)");) {
 
@@ -33,7 +33,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     @Override
     public Integer removeEmployee(int empID) {
         int rows = 0;
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/lms","root","wiley");
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/lms","root","devesh_bamola");
              PreparedStatement preparedStatement = connection
                      .prepareStatement("DELETE FROM employee WHERE employeeId = ?")) {
 
@@ -49,7 +49,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     @Override
     public Employee searchEmployee(int empID) {
         Employee employee = null;
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/lms","root","wiley");
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/lms","root","devesh_bamola");
              PreparedStatement preparedStatement = connection
                      .prepareStatement("SELECT * FROM employee WHERE employeeId = ?");) {
 
@@ -75,7 +75,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     @Override
     public List<Employee> getAllEmployees() {
         List<Employee> empList = new ArrayList<>();
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/lms","root","wiley");
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/lms","root","devesh_bamola");
              PreparedStatement preparedStatement = connection
                      .prepareStatement("SELECT * FROM employee");) {
 
