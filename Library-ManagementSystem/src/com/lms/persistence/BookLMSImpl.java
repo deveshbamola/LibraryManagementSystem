@@ -11,7 +11,7 @@ public class BookLMSImpl implements BookLMSDAO {
     @Override
     public boolean addBook(Book book) {
         int rows = 0;
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/lms","root","devesh_bamola");
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/lms","root","wiley");
              PreparedStatement preparedStatement = connection
                      .prepareStatement("INSERT INTO book values(?, ?, ?, ?, ?, ?, ?)");
         		PreparedStatement preparedStatement1 = connection
@@ -50,7 +50,7 @@ public class BookLMSImpl implements BookLMSDAO {
     @Override
     public int removeBook(String bookName) {
         int rows = 0;
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/lms","root","devesh_bamola");
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/lms","root","wiley");
              PreparedStatement preparedStatement = connection
                      .prepareStatement("DELETE FROM book WHERE bookName=?")) {
 
@@ -66,7 +66,7 @@ public class BookLMSImpl implements BookLMSDAO {
     @Override
     public Book searchBook(String name) {
         Book book = null;
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/lms","root","devesh_bamola");
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/lms","root","wiley");
              PreparedStatement preparedStatement = connection
                      .prepareStatement("SELECT * FROM book  WHERE bookName=?");) {
 
@@ -95,7 +95,7 @@ public class BookLMSImpl implements BookLMSDAO {
 	@Override
 	public boolean issueBook(int employeeId, int bookId, String issueDate,String ScheduledDate) {
 		 int rows = 0,rows1=0,row2=0;
-		try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/lms","root","devesh_bamola");
+		try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/lms","root","wiley");
 				PreparedStatement preparedStatement1 = connection
                         .prepareStatement("{call insertIntoTransactions(?,?)}");
 			PreparedStatement preparedStatement2 = connection
@@ -143,7 +143,7 @@ public class BookLMSImpl implements BookLMSDAO {
     public List<Book> getAllBooks() {
         List<Book> bookList = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/lms",
-                "root", "devesh_bamola");
+                "root", "wiley");
         		 
              PreparedStatement preparedStatement = connection
                      .prepareStatement("SELECT * FROM book");) {

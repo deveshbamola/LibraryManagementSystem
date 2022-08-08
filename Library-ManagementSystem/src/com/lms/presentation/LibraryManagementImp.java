@@ -12,27 +12,148 @@ public class LibraryManagementImp implements LibraryManagementPresentation {
 
     @Override
     public void showMenu() {
-        System.out.println("1. Show All Employees");
-        System.out.println("2. Search Employee by ID");
-        System.out.println("3. Add Employee");
-        System.out.println("4. Delete Employee");
-        System.out.println("------------------");
-        System.out.println("5. Show All Books");
-        System.out.println("6. Search Book by Name");
-        System.out.println("7. Add Book");
-        System.out.println("8. Remove Book");
-        System.out.println("------------------");
-        System.out.println("9. Issue Book");
-//        System.out.println("10. Return Book");
-//        System.out.println("11. Check Due Return Date");
-//        System.out.println("12. Pay Fine");
+    	
+    	while(true) {
+        System.out.println("----------------------------------------");
+    	System.out.println("| WELCOME TO LIBRARY MANAGEMENT SYSTEM |");
+        System.out.println("----------------------------------------");
+        System.out.println("*-----------------------*");
+        System.out.println("|Contributer's--        |");
+        System.out.println("|-Sanketh               |");
+        System.out.println("|-Devesh                |");
+        System.out.println("|-Basith                |");
+        System.out.println("|-Sushas                |");
+        System.out.println("*-----------------------*");
+
+        
+        
+        System.out.println("1. Employee Log in");
+        System.out.println("2. Admin Log in");
+        System.out.println("3. Exit");
+        
+        
+         
         int choice = scanner.nextInt();
-        performMenu(choice);
+     
+        showOperations(choice);
+    	}
 
     }
+    
+    public void showOperations(int choice) {
+        switch (choice) {
+            case 1:
+                employeeLogin();
+                break;
+            case 2:
+            	adminLogin();
+                break;
+            case 3:
+                   System.exit(0);
 
+        }
+    }
+    
+    
+     public void employeeLogin() {
+    	 
+    	 String email,pass;
+    	 
+    	 System.out.println("---------Log-in---------\n");
+    	 System.out.println("Enter email : \n");
+    	 scanner.nextLine();
+    	 email=scanner.nextLine();
+    	
+    	 System.out.println("Enter Passcode : \n");
+    	 pass=scanner.nextLine();
+
+    
+    	 //check user Exist Select * from employee table where email=? and pass=?
+    	 int choice;
+    	 do {
+    		 
+    		 System.out.println("1. Show All Books ");
+    		 System.out.println("2. Search Book by Name");
+    		 System.out.println("3. Take book  *");
+    		 System.out.println("4. Check Due Return Date *");
+    		 System.out.println("5. Pay Fine *");
+    		 System.out.println("6. Return Book *");
+    		 System.out.println("7. Log out");
+    		 System.out.println("Enter your choice : ");
+    		 choice=scanner.nextInt();
+    	     
+    	    performEmployeeMenu(choice);
+    	  
+    	     	 
+    		
+    	 
+    	 }while(choice!=7);
+  
+    	 System.out.println(email+": Logging out Successfully");
+		
+	}
+     @Override
+    public void performEmployeeMenu(int choice) {
+    	switch (choice) {
+		case 1:getAllBooks();
+			break;	
+		case 2:
+			searchBook();
+			break;
+
+		case 3://Take book
+			break;
+
+		case 4://Check Due Return Date
+			break;
+
+		case 5://Pay Fine
+			break;
+
+		case 6://Return Book
+			break;
+		case 7://Log out 			
+			break;
+		default: System.out.println("Invalid Choice");
+			break;
+		}
+    }
+    
+    public void adminLogin() {
+   	 
+   	 String email,pass;
+   	 
+   	 System.out.println("------A*---Log-in---A*------\n");
+   	 System.out.println("Enter email : \n");
+   	 scanner.nextLine();
+   	 email=scanner.nextLine();
+   	
+   	 System.out.println("Enter Passcode : \n");
+   	 
+   	 pass=scanner.nextLine();
+
+   	 //check user Exist Select * from admin table where email=? and pass=?
+   	 
+   	 int choice;
+   	 do {
+   		
+   		 System.out.println("1. Show all Employees");
+   		 System.out.println("2. Search Employee by ID");
+   		 System.out.println("3. Add Employee");
+   		 System.out.println("4. Delete Employee");
+   		 System.out.println("5. Add Book ");
+   		 System.out.println("6. Remove Book ");
+   		 System.out.println("7. Log out");
+   		 System.out.println("Enter your choice : ");
+   		choice=scanner.nextInt();
+   	     performAdminMenu(choice);
+   	 }while(choice!=7);
+	 System.out.println(email+": Logging out Successfully");
+ 
+		
+	}
     @Override
-    public void performMenu(int choice) {
+    public void performAdminMenu(int choice) {
         switch (choice) {
             case 1:
                 getAllEmployees();
@@ -46,28 +167,22 @@ public class LibraryManagementImp implements LibraryManagementPresentation {
             case 4:
                 deleteEmployee();
                 break;
-            case 5:
-            	getAllBooks();
+            case 5:addBook();
                 break;
             case 6:
-                searchBook();
-                break;
-            case 7:
-                addBook();
-                break;
-            case 8:
                 removeBook();
                 break;
-            case 9:
-            	issueBook();
+            case 7:
+            	//log out
                 break;
-            case 10:
-                break;
+            
             default:
-                System.exit(0);
+            	System.out.println("Invalid choice");
+                break;
 
         }
     }
+
     private void getAllBooks() {
         List<Book> bookList = bookService.getAllBooks();
         if (bookList == null) {
@@ -77,7 +192,8 @@ public class LibraryManagementImp implements LibraryManagementPresentation {
         for (Book book : bookList)
             System.out.println(book);
     }
-
+    
+    
     private void getAllEmployees() {
         List<Employee> empList = employeeService.getAllEmployees();
         if (empList == null) {
@@ -98,7 +214,7 @@ public class LibraryManagementImp implements LibraryManagementPresentation {
         System.out.println("Enter Designation: ");
         String designation = scanner.next();
         
-        Employee employee = new Employee(empID, empFirstName, empLastName, designation, 0);
+        Employee employee = new Employee(empID, empFirstName, empFirstName, designation, 0);
         System.out.println(employeeService.addEmployee(employee) ? "Success !!" : "Failure");
     }
 
@@ -122,16 +238,16 @@ public class LibraryManagementImp implements LibraryManagementPresentation {
     }
 
     private void searchBook() {
-        System.out.println("Enter Book Name: "+"\n");
+        System.out.println("Enter Book Name: \n");
         scanner.nextLine();
         String name = scanner.nextLine();
-      
         Book book = bookService.searchBook(name);
         if (book != null)
             System.out.println(book);
         else
             System.out.println("Book Does Not Exist");
     }
+
 
     private void addBook() {
         System.out.println("Enter Book Name: ");
@@ -155,6 +271,7 @@ public class LibraryManagementImp implements LibraryManagementPresentation {
         String name = scanner.next();
         System.out.println(bookService.removeBook(name) ? "Success" : "Failed");
     }
+   
     private void issueBook() {
     	System.out.print("Enter Employee ID: ");
         int id = scanner.nextInt();
@@ -164,4 +281,12 @@ public class LibraryManagementImp implements LibraryManagementPresentation {
         String date = scanner.next();
          System.out.println( bookService.issueBook(id, bid, date));
     }
-    }
+
+    
+
+	@Override
+	public void performMenu(int choice) {
+		// TODO Auto-generated method stub
+		
+	}
+}
