@@ -164,6 +164,29 @@ public class BookLMSImpl implements BookLMSDAO {
         }
         return bookList;
     }
+	
+	@Override
+    public String checkReturnDate(int empID, int bookId) {
+
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/lms","root","wiley");
+             PreparedStatement preparedStatement = connection
+                     .prepareStatement("SELECT returnDate FROM tbr INNER JOIN transactions using(transactionID) " +
+                             "WHERE bookId = ? AND emplyeeID = ?");)
+        {
+            preparedStatement.setInt(1, bookId);
+            preparedStatement.setInt(2, empID);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            String result  = "";
+            if (resultSet.next()) {
+                String bookName = resultSet.getDate("returnDate");
+                result += bookName.toString() + "\n";
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getLocalizedMessage());
+        }
+        return result;
+    }
+	
 	@Override
 	public boolean returnBook(int employeeId, int bookId) {
 		return false;

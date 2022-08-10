@@ -13,4 +13,5 @@ public interface BookLMSDAO {
      List<Book> getAllBooks();
     boolean issueBook(int transactionId,int bookId,String issueDate,String ScheduledDate);
     boolean returnBook(int employeeId,int bookId);
+	String checkReturnDate(int empID, int bookID);
 }

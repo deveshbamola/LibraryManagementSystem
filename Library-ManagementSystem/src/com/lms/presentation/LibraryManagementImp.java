@@ -312,6 +312,14 @@ public class LibraryManagementImp implements LibraryManagementPresentation {
         String date = scanner.next();
          System.out.println( bookService.issueBook(id, bid, date));
     }
+	
+	private void checkDueReturnDate() {
+        System.out.println("Enter Employee ID:");
+        int id = scanner.nextInt();
+        System.out.println("Enter book ID:");
+        int bookId = scanner.nextInt();
+        System.out.println(bookService.checkReturnDate(id, bookId));
+    }
 
     
 

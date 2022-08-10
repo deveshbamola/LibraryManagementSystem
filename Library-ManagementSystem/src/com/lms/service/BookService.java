@@ -14,4 +14,5 @@ public interface BookService {
     boolean issueBook(int transactionId,int bookId,String ScheduledDate);
 
     List<Book> getAllBooks();
+	String checkDueReturnDate(int empID, int bookID);
 }

@@ -36,4 +36,9 @@ public class BookServiceImpl implements BookService {
 	     System.out.println("Current date: "+date);
 		return bookLMSDAO.issueBook(transactionId, bookId, date.toString(),ScheduledDate);
 	}
+	
+	@Override
+    public String checkDueReturnDate(int empID, int bookID) {
+        return bookLMSDAO.checkReturnDate(empID, bookID);
+    }
 }
