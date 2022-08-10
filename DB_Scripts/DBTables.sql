@@ -29,6 +29,14 @@ employeeId int,
 constraint FOREIGN KEY (employeeId) REFERENCES employee(employeeId)
 );
 
+create table user(
+employeeId int,
+email varchar(30) primary key,
+pass varchar(20),
+
+constraint FOREIGN KEY (employeeId) REFERENCES employee(employeeId)
+);
+
 -- Book Table
 create   table book(
 bookId int primary key,

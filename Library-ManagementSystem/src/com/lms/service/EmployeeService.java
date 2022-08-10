@@ -15,4 +15,8 @@ public interface EmployeeService {
     Employee searchEmployee(Integer empID);
 
     List<Employee> getAllEmployees();
+
+	int checkUser(String email, String pass);
+
+	
 }

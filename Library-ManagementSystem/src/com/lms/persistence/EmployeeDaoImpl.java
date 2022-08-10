@@ -94,4 +94,28 @@ public class EmployeeDaoImpl implements EmployeeDao {
         }
         return empList;
     }
+
+	@Override
+	public int getEId(String email,String pass) {
+		String qry="Select employeeId from user where email=? and pass=?";
+		int eid=0;
+		 try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/lms","root","wiley");
+	          PreparedStatement preparedStatement = connection.prepareStatement(qry);) {
+			 
+			 preparedStatement.setString(1, email);
+			 preparedStatement.setString(2, pass);
+			 
+			 ResultSet resultSet = preparedStatement.executeQuery();
+	            while (resultSet.next()) {
+	                eid = resultSet.getInt("employeeId");
+	                
+	               
+	            }
+			 
+		 }catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+		 
+		return eid;
+	}
 }

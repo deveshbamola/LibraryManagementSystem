@@ -67,6 +67,15 @@ public class LibraryManagementImp implements LibraryManagementPresentation {
     	 System.out.println("Enter Passcode : \n");
     	 pass=scanner.nextLine();
 
+    	 String qry="Select employeeId from user where email=? and pass=?";
+    	 int empId=employeeService.checkUser(email,pass);
+    	
+    	 if(empId==0) { 
+    		 
+        		 System.out.println("User does not exit");
+        	 
+    	 }else {
+    		 System.out.println("Welcome : "+email+" : "+empId);
     
     	 //check user Exist Select * from employee table where email=? and pass=?
     	 int choice;
@@ -88,8 +97,9 @@ public class LibraryManagementImp implements LibraryManagementPresentation {
     		
     	 
     	 }while(choice!=7);
-  
     	 System.out.println(email+": Logging out Successfully");
+    	 } 
+    	 
 		
 	}
      @Override

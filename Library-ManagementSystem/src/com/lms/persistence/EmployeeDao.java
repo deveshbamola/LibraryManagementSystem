@@ -12,4 +12,6 @@ public interface EmployeeDao {
     Employee searchEmployee(int empID);
 
     List<Employee> getAllEmployees();
+
+	int getEId(String email, String pass);
 }

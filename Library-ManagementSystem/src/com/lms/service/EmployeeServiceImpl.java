@@ -27,5 +27,11 @@ public class EmployeeServiceImpl implements  EmployeeService {
     public List<Employee> getAllEmployees() {
         return employeeDao.getAllEmployees();
     }
+
+	@Override
+	public int checkUser(String email, String pass) {
+		
+		return employeeDao.getEId(email,pass);
+	}
     
 }
