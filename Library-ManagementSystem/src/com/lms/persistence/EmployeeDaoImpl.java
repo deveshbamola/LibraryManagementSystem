@@ -7,11 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EmployeeDaoImpl implements EmployeeDao {
-
+	String pass="devesh_bamola";
     @Override
     public Integer addEmployee(Employee employee) {
         int rows = 0;
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/lms","root","wiley");
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/lms","root",pass);
              PreparedStatement preparedStatement = connection
                      .prepareStatement("INSERT INTO employee VALUES(?,?,?,?,?)");) {
 
@@ -33,7 +33,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     @Override
     public Integer removeEmployee(int empID) {
         int rows = 0;
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/lms","root","wiley");
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/lms","root",pass);
              PreparedStatement preparedStatement = connection
                      .prepareStatement("DELETE FROM employee WHERE employeeId = ?")) {
 
@@ -49,7 +49,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     @Override
     public Employee searchEmployee(int empID) {
         Employee employee = null;
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/lms","root","wiley");
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/lms","root",pass);
              PreparedStatement preparedStatement = connection
                      .prepareStatement("SELECT * FROM employee WHERE employeeId = ?");) {
 
@@ -75,7 +75,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     @Override
     public List<Employee> getAllEmployees() {
         List<Employee> empList = new ArrayList<>();
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/lms","root","wiley");
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/lms","root",pass);
              PreparedStatement preparedStatement = connection
                      .prepareStatement("SELECT * FROM employee");) {
 
@@ -97,9 +97,10 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 	@Override
 	public int getEId(String email,String pass) {
-		String qry="Select employeeId from user where email=? and pass=?";
+		String qry="Select employeeId,type from user where email=? and pass=?";
 		int eid=0;
-		 try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/lms","root","wiley");
+		boolean type=false;
+		 try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/lms","root","devesh_bamola");
 	          PreparedStatement preparedStatement = connection.prepareStatement(qry);) {
 			 
 			 preparedStatement.setString(1, email);
@@ -108,7 +109,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			 ResultSet resultSet = preparedStatement.executeQuery();
 	            while (resultSet.next()) {
 	                eid = resultSet.getInt("employeeId");
-	                
+	                type = resultSet.getBoolean("type");
 	               
 	            }
 			 
@@ -116,6 +117,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	            e.printStackTrace();
 	        }
 		 
-		return eid;
+		return (eid==0)?-1:((type)?1:0);
 	}
 }
