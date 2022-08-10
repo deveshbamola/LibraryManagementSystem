@@ -22,14 +22,11 @@ public class LibraryManagementImp implements LibraryManagementPresentation {
         System.out.println("|-Sanketh               |");
         System.out.println("|-Devesh                |");
         System.out.println("|-Basith                |");
-        System.out.println("|-Sushas                |");
-        System.out.println("*-----------------------*");
-
+        System.out.println("|-Suhas                 |");
+        System.out.println("*-----------------------*");    
         
-        
-        System.out.println("1. Employee Log in");
-//        System.out.println("2. Admin Log in");
-        System.out.println("3. Exit");
+        System.out.println("1. Log in");
+        System.out.println("2. Exit");
         
         
          
@@ -46,9 +43,6 @@ public class LibraryManagementImp implements LibraryManagementPresentation {
                 employeeLogin();
                 break;
             case 2:
-            	adminLogin();
-                break;
-            case 3:
                    System.exit(0);
 
         }
@@ -77,7 +71,6 @@ public class LibraryManagementImp implements LibraryManagementPresentation {
     	 }else if(empId==0) {
     		 System.out.println("Welcome : "+email);
     
-    	 //check user Exist Select * from employee table where email=? and pass=?
     	 int choice;
     	 do {
     		 
@@ -132,7 +125,7 @@ public class LibraryManagementImp implements LibraryManagementPresentation {
 			searchBook();
 			break;
 
-		case 3://Take book
+		case 3://Issue book
 			break;
 
 		case 4://Check Due Return Date
@@ -150,39 +143,7 @@ public class LibraryManagementImp implements LibraryManagementPresentation {
 		}
     }
     
-    public void adminLogin() {
-   	 
-//   	 String email,pass;
-//   	 
-//   	 System.out.println("------A*---Log-in---A*------\n");
-//   	 System.out.println("Enter email : \n");
-//   	 scanner.nextLine();
-//   	 email=scanner.nextLine();
-//   	
-//   	 System.out.println("Enter Passcode : \n");
-//   	 
-//   	 pass=scanner.nextLine();
-//
-//   	 //check user Exist Select * from admin table where email=? and pass=?
-//   	 
-//   	 int choice;
-//   	 do {
-//   		
-//   		 System.out.println("1. Show all Employees");
-//   		 System.out.println("2. Search Employee by ID");
-//   		 System.out.println("3. Add Employee");
-//   		 System.out.println("4. Delete Employee");
-//   		 System.out.println("5. Add Book ");
-//   		 System.out.println("6. Remove Book ");
-//   		 System.out.println("7. Log out");
-//   		 System.out.println("Enter your choice : ");
-//   		choice=scanner.nextInt();
-//   	     performAdminMenu(choice);
-//   	 }while(choice!=7);
-//	 System.out.println(email+": Logging out Successfully");
- 
-		
-	}
+   
     @Override
     public void performAdminMenu(int choice) {
         switch (choice) {

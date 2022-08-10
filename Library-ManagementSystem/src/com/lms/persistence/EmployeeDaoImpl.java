@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EmployeeDaoImpl implements EmployeeDao {
-	String pass="devesh_bamola";
+	String pass="wiley";
     @Override
     public Integer addEmployee(Employee employee) {
         int rows = 0;
@@ -100,7 +100,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		String qry="Select employeeId,type from user where email=? and pass=?";
 		int eid=0;
 		boolean type=false;
-		 try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/lms","root","devesh_bamola");
+		 try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/lms","root","wiley");
 	          PreparedStatement preparedStatement = connection.prepareStatement(qry);) {
 			 
 			 preparedStatement.setString(1, email);
@@ -119,4 +119,26 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		 
 		return (eid==0)?-1:((type)?1:0);
 	}
+	
+	
+	
+	@Override
+	public Boolean returnBook(int employeeId,int transactionID, IssuedBooks issuedBooks) {
+
+		try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/LibraryManagementSystem",
+				"root", "wiley");
+				PreparedStatement preparedStatement = connection.prepareStatement(
+						"UPDATE ISSUEDBOOKS SET returnDate=?,fine=? WHERE employeeId=? AND transactionId=? LIMIT 1");) {
+
+			preparedStatement.setTimestamp(1, Timestamp.valueOf(issuedBooks.getReturnDateTime()));
+			preparedStatement.setDouble(2, issuedBooks.getLateFees());
+			preparedStatement.setInt(3, empID);
+			preparedStatement.setInt(4, transactionID);
+			if (preparedStatement.executeUpdate() != 0)
+				return true;
+		} catch (SQLException e) {
+			System.out.println(e.getLocalizedMessage());
+		}
+
+		return false;
 }
