@@ -6,8 +6,9 @@ import com.lms.persistence.EmployeeDaoImpl;
 
 import java.util.List;
 
-public class EmployeeServiceImpl implements  EmployeeService {
+public class EmployeeServiceImpl implements EmployeeService {
     private final EmployeeDao employeeDao = new EmployeeDaoImpl();
+
     @Override
     public Boolean addEmployee(Employee employee) {
         return employeeDao.addEmployee(employee) > 0;
@@ -28,10 +29,9 @@ public class EmployeeServiceImpl implements  EmployeeService {
         return employeeDao.getAllEmployees();
     }
 
-	@Override
-	public int checkUser(String email, String pass) {
-		
-		return employeeDao.getEId(email,pass);
-	}
-    
+    @Override
+    public int checkUser(String email, String pass) {
+        return employeeDao.getEId(email, pass);
+    }
+
 }
