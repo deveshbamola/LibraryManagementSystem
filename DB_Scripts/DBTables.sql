@@ -33,7 +33,7 @@ create table user(
 employeeId int,
 email varchar(30) primary key,
 pass varchar(20),
-
+type boolean,
 constraint FOREIGN KEY (employeeId) REFERENCES employee(employeeId)
 );
 

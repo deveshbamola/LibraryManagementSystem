@@ -18,24 +18,28 @@ public class LibraryManagementImp implements LibraryManagementPresentation {
     @Override
     public void showMenu() {
 
-        while (true) {
-            System.out.println("----------------------------------------");
-            System.out.println("| WELCOME TO LIBRARY MANAGEMENT SYSTEM |");
-            System.out.println("----------------------------------------");
-            System.out.println("*-----------------------*");
-            System.out.println("|Contributor's--        |");
-            System.out.println("|-Sanketh               |");
-            System.out.println("|-Devesh                |");
-            System.out.println("|-Basit                 |");
-            System.out.println("|-Sushas                |");
-            System.out.println("*-----------------------*");
-            System.out.println("1. Employee Log in");
-//          System.out.println("2. Admin Log in");
-            System.out.println("3. Exit");
+    	while(true) {
+        System.out.println("----------------------------------------");
+    	System.out.println("| WELCOME TO LIBRARY MANAGEMENT SYSTEM |");
+        System.out.println("----------------------------------------");
+        System.out.println("*-----------------------*");
+        System.out.println("|Contributer's--        |");
+        System.out.println("|-Sanketh               |");
+        System.out.println("|-Devesh                |");
+        System.out.println("|-Basith                |");
+        System.out.println("|-Suhas                 |");
+        System.out.println("*-----------------------*");    
+        
+        System.out.println("1. Log in");
+        System.out.println("2. Exit");
+        
+        
+         
+        int choice = scanner.nextInt();
+     
+        showOperations(choice);
+    	}
 
-            int choice = scanner.nextInt();
-            showOperations(choice);
-        }
     }
 
     public void showOperations(int choice) {
@@ -106,6 +110,7 @@ public class LibraryManagementImp implements LibraryManagementPresentation {
                 getAllBooks();
                 break;
             case 2:
+
                 searchBook();
                 break;
 
@@ -130,39 +135,102 @@ public class LibraryManagementImp implements LibraryManagementPresentation {
         }
     }
 
-    public void adminLogin() {
+    
+    
+     public void employeeLogin() {
+    	 
+    	 String email,pass;
+    	 
+    	 System.out.println("---------Log-in---------\n");
+    	 System.out.println("Enter email : \n");
+    	 scanner.nextLine();
+    	 email=scanner.nextLine();
+    	
+    	 System.out.println("Enter Passcode : \n");
+    	 pass=scanner.nextLine();
 
-//   	 String email,pass;
-//   	 
-//   	 System.out.println("------A*---Log-in---A*------\n");
-//   	 System.out.println("Enter email : \n");
-//   	 scanner.nextLine();
-//   	 email=scanner.nextLine();
-//   	
-//   	 System.out.println("Enter Passcode : \n");
-//   	 
-//   	 pass=scanner.nextLine();
-//
-//   	 //check user Exist Select * from admin table where email=? and pass=?
-//   	 
-//   	 int choice;
-//   	 do {
-//   		
-//   		 System.out.println("1. Show all Employees");
-//   		 System.out.println("2. Search Employee by ID");
-//   		 System.out.println("3. Add Employee");
-//   		 System.out.println("4. Delete Employee");
-//   		 System.out.println("5. Add Book ");
-//   		 System.out.println("6. Remove Book ");
-//   		 System.out.println("7. Log out");
-//   		 System.out.println("Enter your choice : ");
-//   		choice=scanner.nextInt();
-//   	     performAdminMenu(choice);
-//   	 }while(choice!=7);
-//	 System.out.println(email+": Logging out Successfully");
+    	 String qry="Select employeeId from user where email=? and pass=?";
+    	 int empId=employeeService.checkUser(email,pass);
+    	
+    	 if(empId==-1) { 
+    		 
+        		 System.out.println("User does not exit");
+        	 
+    	 }else if(empId==0) {
+    		 System.out.println("Welcome : "+email);
+    
+    	 int choice;
+    	 do {
+    		 
+    		 System.out.println("1. Show All Books ");
+    		 System.out.println("2. Search Book by Name");
+    		 System.out.println("3. Take book  *");
+    		 System.out.println("4. Check Due Return Date *");
+    		 System.out.println("5. Pay Fine *");
+    		 System.out.println("6. Return Book *");
+    		 System.out.println("7. Log out");
+    		 System.out.println("Enter your choice : ");
+    		 choice=scanner.nextInt();
+    	     
+    	    performEmployeeMenu(choice);
+    	  
+    	     	 
+    		
+    	 
+    	 }while(choice!=7);
+    	 System.out.println(email+": Logging out Successfully");
+    	 }
+    	 else
+    	 {
+    		 System.out.println("Welcome : "+email);
+    		 
+    	   	 int choice;
+    	   	 do {
+    	   		
+    	   		 System.out.println("1. Show all Employees");
+    	   		 System.out.println("2. Search Employee by ID");
+    	   		 System.out.println("3. Add Employee");
+    	   		 System.out.println("4. Delete Employee");
+    	   		 System.out.println("5. Add Book ");
+    	   		 System.out.println("6. Remove Book ");
+    	   		 System.out.println("7. Log out");
+    	   		 System.out.println("Enter your choice : ");
+    	   		choice=scanner.nextInt();
+    	   	     performAdminMenu(choice);
+    	   	 }while(choice!=7);
+    		 System.out.println(email+": Logging out Successfully");
+    		 
+    	 }
+    	 
+		
+	}
+     @Override
+    public void performEmployeeMenu(int choice) {
+    	switch (choice) {
+		case 1:getAllBooks();
+			break;	
+		case 2:
+			searchBook();
+			break;
 
+		case 3://Issue book
+			break;
 
+		case 4://Check Due Return Date
+			break;
+
+		case 5://Pay Fine
+			break;
+
+		case 6://Return Book
+			break;
+		case 7://Log out 			
+			break;
+		default: System.out.println("Invalid Choice");
+			break;
+		}
     }
+    
 
     @Override
     public void performAdminMenu(int choice) {
