@@ -27,18 +27,23 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public List<Book> getAllBooks() {
-        return  bookLMSDAO.getAllBooks();
+        return bookLMSDAO.getAllBooks();
     }
 
-	@Override
-	public boolean issueBook(int transactionId, int bookId, String ScheduledDate) {
-		 LocalDate date = LocalDate.now();
-	     System.out.println("Current date: "+date);
-		return bookLMSDAO.issueBook(transactionId, bookId, date.toString(),ScheduledDate);
-	}
-	
-	@Override
+    @Override
+    public boolean issueBook(int transactionId, int bookId, String ScheduledDate) {
+        LocalDate date = LocalDate.now();
+        System.out.println("Current date: " + date);
+        return bookLMSDAO.issueBook(transactionId, bookId, date.toString(), ScheduledDate);
+    }
+
+    @Override
     public String checkDueReturnDate(int empID, int bookID) {
         return bookLMSDAO.checkReturnDate(empID, bookID);
+    }
+
+    @Override
+    public boolean returnBook(int tranID) {
+        return bookLMSDAO.returnBook(tranID);
     }
 }
